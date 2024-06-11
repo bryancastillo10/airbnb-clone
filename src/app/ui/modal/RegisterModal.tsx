@@ -4,14 +4,16 @@ import Modal from "./Modal";
 import { Heading, Input, Button } from "@/app/components";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useRegisterModal } from "@/app/hooks";
+import { useLoginModal, useRegisterModal } from "@/app/hooks";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import LoginModal from "./LoginModal";
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const { register, handleSubmit,
@@ -36,6 +38,12 @@ const RegisterModal = () => {
                 setIsLoading(false);
             })
     }
+    
+    const changeModal = () => {
+        registerModal.onClose();
+        loginModal.onOpen();
+    }
+
     const bodyContent = (<div className="flex flex-col gap-4">
         <Heading
             title="Welcome to Airbnb Clone"
@@ -55,7 +63,7 @@ const RegisterModal = () => {
                 <p className="">
                     Already have an account?
                 </p>
-                <p  onClick={registerModal.onClose}
+                <p  onClick={changeModal}
                     className="text-rose-500 cursor-pointer hover:underline">
                     Log in
                 </p>

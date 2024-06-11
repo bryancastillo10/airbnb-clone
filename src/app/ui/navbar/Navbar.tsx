@@ -4,6 +4,7 @@ import { Container } from "../../components";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
+import Categories from "./Categories";
 import { SafeUser } from "@/app/types";
 
 interface NavbarProps{
@@ -19,10 +20,11 @@ const Navbar = ({currentUser}:NavbarProps) => {
                   <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
                     <Logo />
                     <Search />
-            <UserMenu currentUser={currentUser} />
+                    <UserMenu currentUser={currentUser} />
                   </div>
               </Container>
-     </div>
+      </div>
+      <Categories/>
     </nav>
   )
 }
