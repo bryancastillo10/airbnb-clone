@@ -4,7 +4,7 @@ import Modal from "./Modal";
 import { Heading, Input, Button } from "@/app/components";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useLoginModal, useRegisterModal } from "@/app/hooks";
 import toast from "react-hot-toast";
@@ -39,10 +39,10 @@ const RegisterModal = () => {
             })
     }
     
-    const changeModal = () => {
+    const changeModal = useCallback( () => {
         registerModal.onClose();
         loginModal.onOpen();
-    }
+    },[registerModal,loginModal])
 
     const bodyContent = (<div className="flex flex-col gap-4">
         <Heading
