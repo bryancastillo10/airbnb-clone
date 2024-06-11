@@ -25,6 +25,11 @@ const LoginModal = () => {
             }
         });
     
+    const changeModal = () => {
+        registerModal.onOpen();
+        loginModal.onClose();
+    }
+    
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
 
@@ -60,11 +65,11 @@ const LoginModal = () => {
         <div className="text-neutral-500 mt-4 font-light">
             <div className="flex flex-row justify-center items-center gap-2 text-center">
                 <p className="">
-                    Already have an account?
+                    No account yet?
                 </p>
-                <p  onClick={loginModal.onClose}
+                <p  onClick={changeModal}
                     className="text-rose-500 cursor-pointer hover:underline">
-                    Log in
+                    Sign Up Now
                 </p>
             </div>
         </div>
@@ -73,7 +78,7 @@ const LoginModal = () => {
         <Modal
             disabled={isLoading}
             openModal={loginModal.isOpen}
-            title="Log In"
+            title="Log In to Airbnb Clone"
             actionLabel="Log In"
             onClose={loginModal.onClose}
             onSubmit={handleSubmit(onSubmit)}
