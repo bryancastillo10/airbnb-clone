@@ -17,7 +17,7 @@ const Button = ({label, onClick, disabled, outline, small, icon:Icon}:ButtonProp
       <button
           onClick={onClick}
           disabled={disabled}
-          className={` relative disabled:opacity-70 disabled:cursor-not-allowed rounded-xl, hover:opacity-80  transition w-full
+          className={` relative disabled:opacity-70 disabled:cursor-not-allowed rounded-xl hover:opacity-80  transition w-full
             ${outline ? 'bg-white border-black text-black' : 'bg-rose-500 border-rose-400 text-white'} 
             ${small ? 'py-1 text-sm font-light border':'py-3 text-md font-semibold border-2'}
             `}
