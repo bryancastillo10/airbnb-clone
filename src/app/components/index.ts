@@ -8,9 +8,11 @@ import CategoryBox from "./CategoryBox";
 import CategoryInput from "./CategoryInput";
 import CountrySelect from "./CountrySelect";
 import Map from "./Map";
+import Counter from "./Counter";
+import ImageUpload from "./ImageUpload";
 
 export {
     ClientOnly, Container, Avatar, Button, Heading,
     Input, CategoryBox, CategoryInput, CountrySelect,
-    Map
+    Map, Counter, ImageUpload
 };

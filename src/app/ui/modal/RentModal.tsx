@@ -2,7 +2,13 @@
 import { useMemo, useState } from "react";
 import Modal from "./Modal";
 import { useRentModal } from "@/app/hooks";
-import { Heading, CategoryInput, CountrySelect } from "@/app/components";
+import {
+    Heading,
+    CategoryInput,
+    CountrySelect,
+    Counter,
+    ImageUpload,
+} from "@/app/components";
 import { categories } from "@/app/constants";
 import { FieldValues, useForm } from "react-hook-form";
 
@@ -45,7 +51,10 @@ const RentModal = () => {
     // Watch For Changes in Value
     const category = watch('category');
     const location = watch('location');
-
+    const guestCount = watch('guestCount');
+    const roomCount = watch('roomCount');
+    const bathroomCount = watch('bathroomCount');
+    const imageSrc = watch('imageSrc');
     
     const Map = useMemo(() => dynamic(() => import("../../components/Map"), {
         ssr: false
@@ -118,6 +127,48 @@ const RentModal = () => {
         )
     }
 
+    if (phase === PHASE.INFO) {
+        bodyContent = (
+            <div className="flex flex-col gap-6">
+                <Heading
+                    title="Share some information about your place"
+                    subtitle="What are the accomodations do you have?"
+                />
+                <Counter
+                    title="Guests"
+                    subtitle="How many guest can you allow?"
+                    value={guestCount}
+                    onChange={(counterValue)=>setCustomValue('guestCount',counterValue)}
+                />
+                <hr />
+                   <Counter
+                    title="Rooms"
+                    subtitle="How many rooms do you have?"
+                    value={roomCount}
+                    onChange={(counterValue)=>setCustomValue('roomCount',counterValue)}
+                />
+                <hr />
+                    <Counter
+                    title="Bathrooms"
+                    subtitle="How many bathrooms do you have?"
+                    value={bathroomCount}
+                    onChange={(counterValue)=>setCustomValue('bathroomCount',counterValue)}
+                />               
+            </div>
+        )
+    }
+    if (phase === PHASE.IMAGES) {
+        bodyContent = (<div className="flex flex-col gap-8">
+            <Heading
+                title="Please add a photo of your place"
+                subtitle="Show your guests what your place looks like"
+            />
+            <ImageUpload
+                imgValue={imageSrc}
+                onChange={(imageValue)=>setCustomValue('imageSrc',imageValue)}
+            />
+        </div>)
+    }
 
     return (
         <Modal
