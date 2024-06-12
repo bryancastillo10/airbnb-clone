@@ -4,15 +4,19 @@ import Modal from "./Modal";
 import { useRentModal } from "@/app/hooks";
 import {
     Heading,
+    Input,
     CategoryInput,
     CountrySelect,
     Counter,
     ImageUpload,
 } from "@/app/components";
 import { categories } from "@/app/constants";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import dynamic from "next/dynamic";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 enum PHASE {
     CATEGORY = 0,
@@ -25,7 +29,9 @@ enum PHASE {
 
 const RentModal = () => {
     const rentModal = useRentModal();
+    const router = useRouter();
     const [phase, setPhase] = useState(PHASE.CATEGORY);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const { register,
         handleSubmit,
@@ -55,6 +61,8 @@ const RentModal = () => {
     const roomCount = watch('roomCount');
     const bathroomCount = watch('bathroomCount');
     const imageSrc = watch('imageSrc');
+    const title = watch('title');
+    const description = watch('description');
     
     const Map = useMemo(() => dynamic(() => import("../../components/Map"), {
         ssr: false
@@ -76,6 +84,27 @@ const RentModal = () => {
         setPhase((val) => val + 1);
     }
 
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        if (phase !== PHASE.PRICE) {
+            return phaseForward();
+        }
+
+        setIsLoading(true);
+        axios.post('/api/listings', data)
+            .then(() => {
+                toast.success('Listing has been Created');
+                router.refresh();
+                reset();
+                setPhase(PHASE.CATEGORY);
+                rentModal.onClose();
+            })
+            .catch(() => {
+                toast.error('Error error! Something went wrong!');
+            })
+            .finally(() => {
+                setIsLoading(false);
+            })
+    }
     const actionLabel = useMemo(() => {
         if (phase === PHASE.PRICE) {
             return 'Create';
@@ -170,11 +199,61 @@ const RentModal = () => {
         </div>)
     }
 
+    if (phase === PHASE.DESCRIPTION) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="How would you describe your place?"
+                    subtitle="This helps you attract potential clients"
+                />
+
+                <Input
+                    id="title"
+                    label="Title"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+                <hr />
+                <Input
+                    id="description"
+                    label="Description"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+            </div>
+        )
+    }
+
+    if (phase === PHASE.PRICE) {
+        bodyContent = (
+            <div>
+                <Heading
+                    title="Time to set your price"
+                    subtitle="How much would you like to charge per night?"
+                />
+                <Input
+                    id="price"
+                    label="Price"
+                    formatPrice={true}
+                    type="number"
+                    disabled={isLoading}
+                    errors={errors}
+                    register={register}
+                    required
+                />
+            </div>
+        )
+    }
+
     return (
         <Modal
             openModal={rentModal.isOpen}
             onClose={rentModal.onClose}
-            onSubmit={phaseForward}
+            onSubmit={handleSubmit(onSubmit)}
             actionLabel={actionLabel}
             secondaryActionLabel={secondaryActionLabel}
             secondaryAction={phase === PHASE.CATEGORY ? undefined : phaseBackward}

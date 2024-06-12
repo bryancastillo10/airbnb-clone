@@ -16,7 +16,10 @@ const Input = ({ id, label,type,disabled,formatPrice,required,register,errors}:I
   return (
       <div className="w-full relative">
         {formatPrice && (<TbCurrencyPeso size={24} className="text-neutral-7000 absolute top-5 left-2" />)}
-          <input id={id} disabled={disabled} {...register(id, { required })}
+          <input 
+              id={id} 
+              disabled={disabled} 
+              {...register(id, { required })}
               placeholder=" "
               type={type}
               className={`
