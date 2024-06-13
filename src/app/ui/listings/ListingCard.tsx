@@ -8,7 +8,8 @@ import { Listing, Reservation} from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { format } from "date-fns";
-import { Button,HeartButton } from "@/app/components";
+import { Button, HeartButton } from "@/app/components";
+import { formatCurrency } from "@/app/utils/formatCurrency";
 
 interface ListingCardProps{
     data: Listing;
@@ -89,7 +90,7 @@ const ListingCard = (
                     {reservationDate || data.category}
                 </div>
                 <div className="flex flex-row items-center gap-1">
-                    ₱ {price}
+                    {formatCurrency(price)}
                     {!reservation && (
                     <div className="font-light"> per night</div>
                 )}
