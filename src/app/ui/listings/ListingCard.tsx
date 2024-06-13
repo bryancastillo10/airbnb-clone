@@ -3,8 +3,8 @@
 import { MouseEvent, useMemo } from "react";
 import Image from "next/image";
 import { useCountries } from "@/app/hooks";
-import { SafeUser } from "@/app/types";
-import { Listing, Reservation} from "@prisma/client";
+import { SafeListing, SafeUser } from "@/app/types";
+import { Reservation} from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { format } from "date-fns";
@@ -12,7 +12,7 @@ import { Button, HeartButton } from "@/app/components";
 import { formatCurrency } from "@/app/utils/formatCurrency";
 
 interface ListingCardProps{
-    data: Listing;
+    data: SafeListing;
     reservation?: Reservation;
     onAction?: (id: string) => void;
     disabled?: boolean;
@@ -66,7 +66,7 @@ const ListingCard = (
     return (
         <article
             className="group col-span-1 cursor-pointer"
-            onClick={()=>router.push('/listings/${data.id')}
+            onClick={()=>router.push(`/listings/${data.id}`)}
         >
             <div className="flex flex-col gap-2 w-full">
                 <div className="relative aspect-square w-full overflow-hidden rounded-2xl">
