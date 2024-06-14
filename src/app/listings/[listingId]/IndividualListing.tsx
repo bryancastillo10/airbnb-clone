@@ -7,8 +7,7 @@ import { useMemo, useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { categories } from "@/app/constants";
-import { SafeListing, SafeUser } from "@/app/types";
-import { Reservation } from "@prisma/client";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 import { Container } from "@/app/components";
 import { useLoginModal } from "@/app/hooks";
 
@@ -25,7 +24,7 @@ const initialDateRange = {
 };
 
 interface IndividualListingProps{
-    reservations?: Reservation[];
+    reservations?: SafeReservation[];
     listing: SafeListing & { user: SafeUser};
     currentUser?: SafeUser | null;
 }
@@ -86,7 +85,10 @@ const IndividualListing = ({
 
     useEffect(() => {
         if (dateRange.startDate && dateRange.endDate) {
-            const dayCount = differenceInCalendarDays(dateRange.endDate, dateRange.startDate)
+            const dayCount = differenceInCalendarDays(
+                dateRange.endDate,
+                dateRange.startDate
+            )
             if (dayCount && listing.price) {
                 setTotalPrice(dayCount * listing.price);
             }
@@ -138,4 +140,4 @@ const IndividualListing = ({
   )
 }
 
-export default IndividualListing
+export default IndividualListing;
