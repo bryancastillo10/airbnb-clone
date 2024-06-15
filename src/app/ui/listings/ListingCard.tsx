@@ -34,16 +34,14 @@ const ListingCard = (
 
     const location = getByValue(data.locationValue);
     
-    const handleCancel = useCallback(() => {
-        (e: MouseEvent<HTMLButtonElement>) => {
-            e.stopPropagation();
-            if (disabled) {
-                return;
-            }
-
-            onAction?.(actionId);
+    const handleCancel = useCallback((e:MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        if (disabled) {
+            return;
         }
-    }, [disabled, onAction, actionId])
+
+        onAction?.(actionId);
+    },[onAction,actionId,disabled])
     
     const price = useMemo(() => {
         if (reservation) {
