@@ -53,7 +53,7 @@ const UserMenu = ({currentUser}: UserMenuProps) => {
                         <MenuItem onClick={() => router.push("/trips")} label="My Trips" />
                         <MenuItem onClick={() => { }} label="My Favorites" />
                         <MenuItem onClick={() => { }} label="My Properties" />
-                        <MenuItem onClick={() => { }} label="My Reservations" />
+                        <MenuItem onClick={() => router.push("/reservations")} label="My Reservations" />
                         <MenuItem onClick={rentModal.onOpen} label="Airbnb my Home" />
                         <hr />
                         <MenuItem onClick={() => signOut()} label="Logout" />      
