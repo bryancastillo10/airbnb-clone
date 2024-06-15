@@ -13,11 +13,11 @@ import ImageUpload from "./ImageUpload";
 import EmptyState from "./EmptyState";
 import HeartButton from "./HeartButton";
 import Calendar from "./Calendar";
-
+import Loading from "../loading";
 
 export {
     ClientOnly, Container, Avatar, Button, Heading,
     Input, CategoryBox, CategoryInput, CountrySelect,
     Map, Counter, ImageUpload, EmptyState, HeartButton,
-    Calendar
+    Calendar, Loading
 };
