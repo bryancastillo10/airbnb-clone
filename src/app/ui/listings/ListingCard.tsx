@@ -3,8 +3,7 @@
 import { MouseEvent, useMemo } from "react";
 import Image from "next/image";
 import { useCountries } from "@/app/hooks";
-import { SafeListing, SafeUser } from "@/app/types";
-import { Reservation} from "@prisma/client";
+import { SafeListing, SafeUser, SafeReservation } from "@/app/types";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { format } from "date-fns";
@@ -13,7 +12,7 @@ import { formatCurrency } from "@/app/utils/formatCurrency";
 
 interface ListingCardProps{
     data: SafeListing;
-    reservation?: Reservation;
+    reservation?: SafeReservation;
     onAction?: (id: string) => void;
     disabled?: boolean;
     actionLabel?: string;

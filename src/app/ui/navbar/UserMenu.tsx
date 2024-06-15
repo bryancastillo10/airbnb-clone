@@ -6,16 +6,18 @@ import MenuItem from "./MenuItem";
 import { useLoginModal, useRegisterModal, useRentModal } from "@/app/hooks";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps{
     currentUser?: SafeUser | null;
 }
 
 const UserMenu = ({currentUser}: UserMenuProps) => {
-    const registerModal = useRegisterModal();
-    const loginModal = useLoginModal();
-    const rentModal = useRentModal();
-    const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const router = useRouter();
+  const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+  const rentModal = useRentModal();
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   
     const toggleOpen = useCallback(() => {
         setOpenMenu(val => !val)
@@ -48,7 +50,7 @@ const UserMenu = ({currentUser}: UserMenuProps) => {
                   <div className="flex flex-col cursor-pointer">
                       {currentUser ? (
                          <>
-                        <MenuItem onClick={() => { }} label="My Trips" />
+                        <MenuItem onClick={() => router.push("/trips")} label="My Trips" />
                         <MenuItem onClick={() => { }} label="My Favorites" />
                         <MenuItem onClick={() => { }} label="My Properties" />
                         <MenuItem onClick={() => { }} label="My Reservations" />
