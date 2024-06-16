@@ -2,7 +2,7 @@
 import axios from "axios";
 import Modal from "./Modal";
 import { Heading, Input, Button } from "@/app/components";
-import { AiFillFacebook, AiFillGithub } from "react-icons/ai";
+import { AiFillFacebook } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -58,7 +58,6 @@ const RegisterModal = () => {
         <hr />
         <Button outline label="Continue with Google" icon={FcGoogle} onClick={() => signIn('google')} />
         <Button outline label="Continue with Facebook" icon={AiFillFacebook} onClick={() => signIn('facebook')} />
-        <Button outline label="Continue with Github" icon={AiFillGithub} onClick={() => signIn('github')} />
         <div className="text-neutral-500 mt-4 font-light">
             <div className="flex flex-row justify-center items-center gap-2 text-center">
                 <p className="">
