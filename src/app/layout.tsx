@@ -14,7 +14,7 @@ import { getCurrentUser } from "./actions";
 
 
 const font = Nunito({subsets:["latin"]})
-
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "AirBnB Clone",
   description: "E-commerce AirBnb Clone Project",
