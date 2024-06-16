@@ -86,7 +86,7 @@ export const categories: categoriesProps[] = [{
     description:"Remarkable geological artifacts preserved through time",
     }, {  
     id:13,
-    label: "Dessert",
+    label: "Desert",
     icon: GiCactus,
     description:"Explore the natural wonders of the wild wild West",
     },

@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import { TbPhotoPlus } from "react-icons/tb";
-import { Container } from "postcss";
+
 
 declare global{
     var cloudinary: any;

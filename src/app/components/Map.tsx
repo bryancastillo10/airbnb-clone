@@ -1,4 +1,6 @@
 "use client";
+export const dynamic = "force-dynamic";
+
 import leaf from "leaflet";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
