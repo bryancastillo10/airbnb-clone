@@ -18,15 +18,6 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "AirBnB Clone",
   description: "E-commerce AirBnb Clone Project",
-  icons: {
-    icon: [
-      {
-        media: "(prefers-color-scheme:light)",
-        url: "/icons/airbnb.ico",
-        href: "/icons/airbnb.ico"
-      },
-    ]
-  }
 };
 
 export default async function RootLayout({
@@ -37,6 +28,9 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
   return (
     <html lang="en">
+       <head>
+        <link rel="icon" href="/icons/airbnb.ico" />
+      </head>
       <body className={font.className}>
         <ClientOnly>
           <ToasterProvider />
